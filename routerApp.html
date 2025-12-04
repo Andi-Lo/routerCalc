@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Router Calculator</title>
+    <style>
+        :root {
+            /* Palette inspiriert von technischen Zeichnungen */
+            --bg-dark: #0f1724;
+            --bg-gradient-start: #131b2e;
+            --bg-gradient-end: #0a0e17;
+
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+
+            --text-main: #e2e8f0;
+            --text-muted: #64748b;
+
+            --accent: #fbbf24;
+            /* Technisches Gelb/Orange */
+            --line-color: rgba(255, 255, 255, 0.2);
+            --grid-color: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            /* Subtiler technischer Hintergrund-Verlauf */
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+                radial-gradient(circle at top right, #1e293b 0%, var(--bg-dark) 100%);
+            background-size: 40px 40px, 40px 40px, cover;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header Area */
+        header {
+            padding: 16px 24px;
+            margin-bottom: 52px;
+            border-bottom: 1px solid var(--line-color);
+            background: rgba(15, 23, 36, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            flex: 1;
+            padding: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Modern Glass Cards */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 0 16px 24px 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dekorative Ecken wie bei tech drawings */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .label-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Custom Modern Inputs */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .unit {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-family: 'Courier New', monospace;
+            pointer-events: none;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--line-color);
+            border-radius: 12px;
+            padding: 16px;
+            padding-right: 50px;
+            /* Platz für "mm" */
+            font-size: 20px;
+            color: white;
+            font-family: 'Courier New', monospace;
+            /* Tech look */
+            font-weight: bold;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Result Display */
+        .result-box {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .result-value {
+            font-family: 'Courier New', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+            margin: 10px 0;
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            color: var(--text-muted);
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        /* SVG Visualization - CAD Style */
+        .visualizer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        svg {
+            width: 100%;
+            height: 200px;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+        }
+
+        /* SVG Styles */
+        .cad-line {
+            stroke: var(--text-main);
+            stroke-width: 1.5;
+            fill: none;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .cad-dashed {
+            stroke: var(--text-muted);
+            stroke-width: 1;
+            stroke-dasharray: 4, 4;
+        }
+
+        .cad-center {
+            stroke: var(--accent);
+            stroke-width: 1;
+            stroke-dasharray: 10, 2, 2, 2;
+            opacity: 0.5;
+        }
+
+        .cad-fill {
+            fill: rgba(255, 255, 255, 0.05);
+        }
+
+        .cad-hatch {
+            fill: url(#diagonalHatch);
+        }
+
+        .cad-dim {
+            stroke: var(--accent);
+            fill: var(--accent);
+        }
+
+        .cad-text {
+            fill: var(--accent);
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            text-anchor: middle;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--line-color);
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>
+            <img src="routerCalcLogo.png" alt="Logo" style="height: 48px; margin-right: 12px; border-radius: 4px;">
+            Router<span style="color:white; opacity:0.5">Calc</span>
+        </h1>
+        <button id="lang-toggle" class="lang-btn">DE</button>
+    </header>
+
+    <!-- Input Card -->
+    <div class="card">
+        <div class="label-group">
+            <label for="bit" data-i18n="bit">Fräser</label>
+        </div>
+        <div class="input-wrapper">
+            <input type="number" id="bit" placeholder="0" inputmode="decimal" value="8">
+            <span class="unit">mm</span>
+        </div>
+
+        <div class="label-group">
+            <label for="bush" data-i18n="bush">Kopierring</label>
+        </div>
+        <div class="input-wrapper">
+            <input type="number" id="bush" placeholder="0" inputmode="decimal" value="17">
+            <span class="unit">mm</span>
+        </div>
+
+        <div class="label-group">
+            <label for="target" data-i18n="target">Gewünschte Fräsung</label>
+        </div>
+        <div class="input-wrapper">
+            <input type="number" id="target" placeholder="0" inputmode="decimal" value="100">
+            <span class="unit">mm</span>
+        </div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="card">
+        <div style="position: absolute; top: 15px; left: 15px; font-size: 10px; color: var(--text-muted); letter-spacing: 1px;"
+            data-i18n="result_title">
+            ERGEBNIS
+        </div>
+
+        <div class="result-box">
+            <div style="font-size: 10px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 5px;"
+                data-i18n="template_size">
+                SCHABLONENMASS (LOCHGRÖSSE)</div>
+            <div class="result-value" id="template-result" style="color: #4ade80;">109.00</div>
+            <div class="formula" id="template-formula">100 + (17 - 8) = 109</div>
+        </div>
+
+        <div class="result-box" style="border-top: 1px solid var(--line-color); margin-top: 20px; padding-top: 20px;">
+            <div style="font-size: 10px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 5px;"
+                data-i18n="offset">VERSATZ
+                (OFFSET)</div>
+            <div class="result-value" id="result">4.50</div>
+            <div class="formula" id="formula-display">OFFSET = (17 - 8) / 2</div>
+        </div>
+
+
+        <!-- CAD Visualization -->
+        <div class="visualizer">
+            <svg id="drawing" viewBox="0 0 240 200">
+                <defs>
+                    <!-- Pattern für Schraffur -->
+                    <pattern id="diagonalHatch" width="6" height="6" patternTransform="rotate(45 0 0)"
+                        patternUnits="userSpaceOnUse">
+                        <line x1="0" y1="0" x2="0" y2="10" style="stroke:var(--accent); stroke-width:1; opacity: 0.3" />
+                    </pattern>
+                    <!-- Arrow Marker -->
+                    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L6,3 L0,6 L1,3 z" fill="#fbbf24" />
+                    </marker>
+                    <marker id="arrow-start" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto">
+                        <path d="M6,0 L0,3 L6,6 L5,3 z" fill="#fbbf24" />
+                    </marker>
+                </defs>
+
+                <!-- Crosshair / Center Lines -->
+                <line x1="120" y1="20" x2="120" y2="180" class="cad-center" />
+                <line x1="40" y1="100" x2="200" y2="100" class="cad-center" />
+
+                <!-- Bushing (Outer) -->
+                <circle id="svgBush" cx="120" cy="100" r="70" class="cad-line cad-fill" />
+
+                <!-- Bit (Inner) -->
+                <circle id="svgBit" cx="120" cy="100" r="30" class="cad-line cad-hatch" />
+
+                <!-- Dimension Line (Visualizing the Offset) -->
+                <!-- Positioned dynamically via JS -->
+                <g id="dimGroup" style="opacity: 1;">
+                    <line id="dimLine" x1="150" y1="100" x2="190" y2="100" stroke="var(--accent)" stroke-width="1"
+                        marker-end="url(#arrow)" marker-start="url(#arrow-start)" />
+                    <line id="dimTick1" x1="150" y1="95" x2="150" y2="105" stroke="var(--accent)" stroke-width="1" />
+                    <line id="dimTick2" x1="190" y1="95" x2="190" y2="105" stroke="var(--accent)" stroke-width="1" />
+                    <text id="dimText" x="170" y="90" class="cad-text">4.5</text>
+                </g>
+
+            </svg>
+        </div>
+
+        <div style="text-align:center; margin-top:10px; font-size: 11px; color: var(--text-muted);">
+            <!-- SCHNITT A-A • M 1:1 -->
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        const bitInput = document.getElementById('bit');
+        const bushInput = document.getElementById('bush');
+        const targetInput = document.getElementById('target');
+        const resultEl = document.getElementById('result');
+        const formulaEl = document.getElementById('formula-display');
+        const templateResultEl = document.getElementById('template-result');
+        const templateFormulaEl = document.getElementById('template-formula');
+        const langToggle = document.getElementById('lang-toggle');
+
+        let currentLang = 'en';
+
+        const translations = {
+            de: {
+                bit: "Fräser",
+                bush: "Kopierring",
+                target: "Gewünschte Fräsung",
+                result_title: "ERGEBNIS",
+                template_size: "SCHABLONENMASS (LOCHGRÖSSE)",
+                offset: "VERSATZ",
+                error: "FEHLER",
+                error_msg: "Fräser > Ring",
+                toggle: "EN"
+            },
+            en: {
+                bit: "Router Bit",
+                bush: "Guide Bushing",
+                target: "Target Cut Size",
+                result_title: "RESULT",
+                template_size: "TEMPLATE SIZE (HOLE SIZE)",
+                offset: "OFFSET",
+                error: "ERROR",
+                error_msg: "Bit > Bushing",
+                toggle: "DE"
+            }
+        };
+
+        function updateLanguage() {
+            const t = translations[currentLang];
+
+            // Update static elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerText = t[key];
+            });
+
+            // Update Toggle Button
+            langToggle.innerText = t.toggle;
+
+            // Recalculate to update dynamic text
+            calculate();
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'de' ? 'en' : 'de';
+            updateLanguage();
+        });
+
+        // SVG Elements
+        const svgBush = document.getElementById('svgBush');
+        const svgBit = document.getElementById('svgBit');
+        const dimGroup = document.getElementById('dimGroup');
+        const dimLine = document.getElementById('dimLine');
+        const dimTick1 = document.getElementById('dimTick1');
+        const dimTick2 = document.getElementById('dimTick2');
+        const dimText = document.getElementById('dimText');
+
+        function calculate() {
+            let bit = parseFloat(bitInput.value.replace(',', '.'));
+            let bush = parseFloat(bushInput.value.replace(',', '.'));
+
+            if (isNaN(bit)) bit = 0;
+            if (isNaN(bush)) bush = 0;
+
+            if (bit >= bush && bush > 0) {
+                resultEl.innerText = translations[currentLang].error;
+                resultEl.style.color = "#ef4444"; // Red
+                formulaEl.innerText = translations[currentLang].error_msg;
+                dimGroup.style.opacity = 0;
+                return;
+            } else {
+                resultEl.style.color = "var(--accent)";
+                dimGroup.style.opacity = 1;
+            }
+
+            const offset = (bush - bit) / 2;
+            const target = parseFloat(targetInput.value.replace(',', '.')) || 0;
+            const templateSize = target + (bush - bit);
+
+            // Result Text
+            resultEl.innerText = offset.toFixed(2) + " mm";
+            formulaEl.innerText = `(${bush} - ${bit}) / 2 = ${offset}`;
+
+            // Template Result
+            templateResultEl.innerText = templateSize.toFixed(2) + " mm";
+            templateFormulaEl.innerText = `${target} + (${bush} - ${bit}) = ${templateSize}`;
+
+            // --- Visualization Logic ---
+            // Max radius in SVG is approx 80px available space
+            // Scale logic: We assume max Bushing is around 40mm physically
+            let scale = 3.5;
+            let rBush = (bush / 2) * scale;
+            let rBit = (bit / 2) * scale;
+
+            // Clamping max size
+            if (rBush > 80) {
+                const ratio = 80 / rBush;
+                rBush = 80;
+                rBit = rBit * ratio;
+            }
+            if (rBit < 4 && bit > 0) rBit = 4; // Min visibility
+
+            svgBush.setAttribute('r', rBush);
+            svgBit.setAttribute('r', rBit);
+
+            // Update Dimension Line (The Offset)
+            // Center is 120, 100
+            const startX = 120 + rBit;
+            const endX = 120 + rBush;
+
+            // Check if there is enough space to draw the arrow inside
+            const width = endX - startX;
+            const midX = startX + (width / 2);
+
+            dimLine.setAttribute('x1', startX);
+            dimLine.setAttribute('x2', endX);
+
+            dimTick1.setAttribute('x1', startX);
+            dimTick1.setAttribute('x2', startX);
+            dimTick2.setAttribute('x1', endX);
+            dimTick2.setAttribute('x2', endX);
+
+            dimText.setAttribute('x', midX);
+            dimText.textContent = offset.toFixed(1);
+
+            // Hide dimension if too small
+            if (offset <= 0) {
+                dimGroup.style.opacity = 0;
+            }
+        }
+
+        // Event Listeners
+        bitInput.addEventListener('input', calculate);
+        bushInput.addEventListener('input', calculate);
+        targetInput.addEventListener('input', calculate);
+
+        // Init
+        calculate();
+    </script>
+</body>
+
+</html>
