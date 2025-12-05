@@ -1,0 +1,248 @@
+:root {
+    /* Palette inspiriert von technischen Zeichnungen */
+    --bg-dark: #0f1724;
+    --bg-gradient-start: #131b2e;
+    --bg-gradient-end: #0a0e17;
+
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    --text-main: #e2e8f0;
+    --text-muted: #64748b;
+
+    --accent: #fbbf24;
+    /* Technisches Gelb/Orange */
+    --line-color: rgba(255, 255, 255, 0.2);
+    --grid-color: rgba(255, 255, 255, 0.03);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    /* Subtiler technischer Hintergrund-Verlauf */
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+        radial-gradient(circle at top right, #1e293b 0%, var(--bg-dark) 100%);
+    background-size: 40px 40px, 40px 40px, cover;
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header Area */
+header {
+    padding: 16px 24px;
+    margin-bottom: 52px;
+    border-bottom: 1px solid var(--line-color);
+    background: rgba(15, 23, 36, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    flex: 1;
+    padding: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Modern Glass Cards */
+.card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 0 16px 24px 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dekorative Ecken wie bei tech drawings */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Custom Modern Inputs */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.unit {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-family: 'Courier New', monospace;
+    pointer-events: none;
+}
+
+input[type="number"] {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--line-color);
+    border-radius: 12px;
+    padding: 16px;
+    padding-right: 50px;
+    /* Platz für "mm" */
+    font-size: 20px;
+    color: white;
+    font-family: 'Courier New', monospace;
+    /* Tech look */
+    font-weight: bold;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Result Display */
+.result-box {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.result-value {
+    font-family: 'Courier New', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    margin: 10px 0;
+}
+
+.formula {
+    font-family: 'Courier New', monospace;
+    color: var(--text-muted);
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+/* SVG Visualization - CAD Style */
+.visualizer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+svg {
+    width: 100%;
+    height: 200px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+/* SVG Styles */
+.cad-line {
+    stroke: var(--text-main);
+    stroke-width: 1.5;
+    fill: none;
+    vector-effect: non-scaling-stroke;
+}
+
+.cad-dashed {
+    stroke: var(--text-muted);
+    stroke-width: 1;
+    stroke-dasharray: 4, 4;
+}
+
+.cad-center {
+    stroke: var(--accent);
+    stroke-width: 1;
+    stroke-dasharray: 10, 2, 2, 2;
+    opacity: 0.5;
+}
+
+.cad-fill {
+    fill: rgba(255, 255, 255, 0.05);
+}
+
+.cad-hatch {
+    fill: url(#diagonalHatch);
+}
+
+.cad-dim {
+    stroke: var(--accent);
+    fill: var(--accent);
+}
+
+.cad-text {
+    fill: var(--accent);
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    text-anchor: middle;
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line-color);
+    color: var(--text-muted);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+}
