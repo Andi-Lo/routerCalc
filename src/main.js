@@ -83,16 +83,21 @@ function calculate() {
     }
 
     const offset = (bush - bit) / 2;
-    const target = parseFloat(targetInput.value.replace(',', '.')) || 0;
-    const templateSize = target + (bush - bit);
 
     // Result Text
     resultEl.innerText = offset.toFixed(2) + " mm";
     formulaEl.innerText = `(${bush} - ${bit}) / 2 = ${offset}`;
 
     // Template Result
-    templateResultEl.innerText = templateSize.toFixed(2) + " mm";
-    templateFormulaEl.innerText = `${target} + (${bush} - ${bit}) = ${templateSize}`;
+    if (targetInput.value.trim() === '') {
+        templateResultEl.innerText = "-";
+        templateFormulaEl.innerText = "-";
+    } else {
+        const target = parseFloat(targetInput.value.replace(',', '.')) || 0;
+        const templateSize = target + (bush - bit);
+        templateResultEl.innerText = templateSize.toFixed(2) + " mm";
+        templateFormulaEl.innerText = `${target} + (${bush} - ${bit}) = ${templateSize}`;
+    }
 
     // --- Visualization Logic ---
     // Max radius in SVG is approx 80px available space
