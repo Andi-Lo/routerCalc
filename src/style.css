@@ -9,11 +9,23 @@
 
     --text-main: #e2e8f0;
     --text-muted: #64748b;
+    --text-small: .75rem;
+
+    --font-size: 16px;
 
     --accent: #fbbf24;
     /* Technisches Gelb/Orange */
     --line-color: rgba(255, 255, 255, 0.2);
     --grid-color: rgba(255, 255, 255, 0.03);
+}
+
+html,
+body {
+    font-size: var(--font-size);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
 }
 
 body {
@@ -24,22 +36,15 @@ body {
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
         radial-gradient(circle at top right, #1e293b 0%, var(--bg-dark) 100%);
-    background-size: 40px 40px, 40px 40px, cover;
+    background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, cover;
     color: var(--text-main);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
 }
 
 /* Header Area */
 header {
-    padding: 16px 24px;
-    margin-bottom: 52px;
+    padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--line-color);
     background: rgba(15, 23, 36, 0.8);
     backdrop-filter: blur(10px);
@@ -53,9 +58,9 @@ header {
 }
 
 h1 {
-    font-size: 16px;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.125rem;
     font-weight: 600;
     margin: 0;
     color: var(--accent);
@@ -63,11 +68,19 @@ h1 {
     align-items: center;
 }
 
+small,
+.text-small {
+    font-size: var(--text-small);
+}
+
 .container {
     flex: 1;
-    padding: 24px;
-    max-width: 500px;
-    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 1.5rem .5rem;
+    max-width: 31.25rem;
+    margin: 1.5rem auto;
     width: 100%;
     box-sizing: border-box;
 }
@@ -76,10 +89,9 @@ h1 {
 .card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 24px;
-    margin: 0 16px 24px 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: relative;
@@ -101,13 +113,13 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
 }
 
 label {
-    font-size: 12px;
+    font-size: var(--text-small);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.0625rem;
     color: var(--text-muted);
     font-weight: 500;
 }
@@ -115,12 +127,12 @@ label {
 /* Custom Modern Inputs */
 .input-wrapper {
     position: relative;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 }
 
 .unit {
     position: absolute;
-    right: 16px;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
@@ -129,14 +141,15 @@ label {
 }
 
 input[type="number"] {
+    position: relative;
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--line-color);
-    border-radius: 12px;
-    padding: 16px;
-    padding-right: 50px;
+    border-radius: 0.75rem;
+    padding: .75rem 1rem;
+    padding-right: 3rem;
     /* Platz für "mm" */
-    font-size: 20px;
+    font-size: 1rem;
     color: white;
     font-family: 'Courier New', monospace;
     /* Tech look */
@@ -148,46 +161,46 @@ input[type="number"] {
 
 input[type="number"]:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+    box-shadow: 0 0 0 0.125rem rgba(251, 191, 36, 0.2);
     background: rgba(0, 0, 0, 0.4);
 }
 
 /* Result Display */
 .result-box {
     text-align: center;
-    padding: 30px 0;
+    padding: 1rem 0;
 }
 
 .result-value {
     font-family: 'Courier New', monospace;
-    font-size: 48px;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--accent);
-    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-    margin: 10px 0;
+    text-shadow: 0 0 1.25rem rgba(251, 191, 36, 0.3);
+    margin: 0.75rem 0;
 }
 
 .formula {
     font-family: 'Courier New', monospace;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 0.875rem;
     background: rgba(255, 255, 255, 0.05);
     display: inline-block;
-    padding: 4px 12px;
-    border-radius: 4px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
 }
 
 /* SVG Visualization - CAD Style */
 .visualizer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 0.625rem;
 }
 
 svg {
     width: 100%;
-    height: 200px;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    height: 12.5rem;
+    filter: drop-shadow(0 0 0.625rem rgba(0, 0, 0, 0.5));
 }
 
 /* SVG Styles */
@@ -195,7 +208,6 @@ svg {
     stroke: var(--text-main);
     stroke-width: 1.5;
     fill: none;
-    vector-effect: non-scaling-stroke;
 }
 
 .cad-dashed {
@@ -227,7 +239,7 @@ svg {
 .cad-text {
     fill: var(--accent);
     font-family: 'Courier New', monospace;
-    font-size: 12px;
+    font-size: 0.75rem;
     text-anchor: middle;
 }
 
@@ -235,9 +247,9 @@ svg {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid var(--line-color);
     color: var(--text-muted);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
 }
