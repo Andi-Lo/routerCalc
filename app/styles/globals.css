@@ -1,26 +1,6 @@
 @import "tailwindcss";
-
-:root {
-    /* Palette inspiriert von technischen Zeichnungen */
-    --bg-dark: #0f1724;
-    --bg-gradient-start: #131b2e;
-    --bg-gradient-end: #0a0e17;
-
-    --glass-bg: rgba(30, 41, 59, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-
-    --text-main: #e2e8f0;
-    --text-muted: #64748b;
-    --text-small: .75rem;
-
-    --font-size: 16px;
-
-    --accent: #fbbf24;
-    --text-error: #ef4444;
-
-    --line-color: rgba(255, 255, 255, 0.2);
-    --grid-color: rgba(255, 255, 255, 0.03);
-}
+@import "./variables.css";
+@import "./animations/ring-spin.css";
 
 html,
 body {
@@ -101,9 +81,11 @@ label {
     font-weight: 500;
 }
 
+
 /* Custom Modern Inputs */
 .input-wrapper {
     position: relative;
+    border-radius: 0.75rem;
 }
 
 .unit {
@@ -132,9 +114,12 @@ input[type="number"] {
     transition: all 0.3s ease;
 }
 
+input[type="number"]:hover {
+    border-color: var(--line-color-hover);
+}
+
 input[type="number"]:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 0.125rem rgba(251, 191, 36, 0.2);
+    border-color: transparent;
     background: rgba(0, 0, 0, 0.4);
 }
 
@@ -167,7 +152,7 @@ input[type="number"]:focus {
 }
 
 .result-value--green {
-    color: #4ade80;
+    color: var(--accent-green);
     text-shadow: 0 0 1.25rem rgba(74, 222, 128, 0.3);
 }
 

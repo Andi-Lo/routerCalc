@@ -33,7 +33,7 @@ export const RouterInput: React.FC<RouterProps> = ({
       <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="bit">{i18n('bit')}</label>
       </div>
-      <div className="input-wrapper mb-6">
+      <div className="input-wrapper ring-spin mb-6">
         <input
           type="number"
           id="bit"
@@ -47,7 +47,7 @@ export const RouterInput: React.FC<RouterProps> = ({
       <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="bush">{i18n('bush')}</label>
       </div>
-      <div className="input-wrapper mb-6">
+      <div className="input-wrapper ring-spin">
         <input
           type="number"
           id="bush"
@@ -56,13 +56,13 @@ export const RouterInput: React.FC<RouterProps> = ({
           inputMode="decimal"
         ></input>
         <span className="unit">mm</span>
-        <label className="pt-2 hint">{i18n('target_size_hint')}</label>
       </div>
+      <label className="pt-2 block mb-6 hint">{i18n('target_size_hint')}</label>
 
       <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="targetSize">{i18n('target_size')}</label>
       </div>
-      <div className="input-wrapper">
+      <div className="input-wrapper ring-spin ring-spin--green">
         <input
           type="number"
           id="targetSize"

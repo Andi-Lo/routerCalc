@@ -1,0 +1,36 @@
+:root {
+    /* Palette inspiriert von technischen Zeichnungen */
+    --bg-dark: #0f1724;
+    --bg-gradient-start: #131b2e;
+    --bg-gradient-end: #0a0e17;
+
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    --text-main: #e2e8f0;
+    --text-muted: #64748b;
+    --text-small: .75rem;
+
+    --font-size: 16px;
+
+    --accent: #fbbf24;
+    --accent-green: #4ade80;
+    --text-error: #ef4444;
+
+    --line-color: rgba(255, 255, 255, 0.2);
+    --line-color-hover: rgba(255, 255, 255, 0.4);
+    --grid-color: rgba(255, 255, 255, 0.03);
+
+    /* Ring spin animation */
+    --ring-spin-color: rgba(251, 191, 36, 0.45);
+    --ring-spin-glow: rgba(251, 191, 36, 0.35);
+    --ring-spin-color-green: rgba(74, 222, 128, 0.45);
+    --ring-spin-glow-green: rgba(74, 222, 128, 0.35);
+
+    /* Input borders */
+    --input-border-accent: rgba(251, 191, 36, 0.25);
+    --input-border-accent-hover: rgba(251, 191, 36, 0.45);
+    --input-border-green: rgba(74, 222, 128, 0.25);
+    --input-border-green-hover: rgba(74, 222, 128, 0.45);
+}
+
