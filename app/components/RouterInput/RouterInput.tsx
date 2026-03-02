@@ -9,6 +9,7 @@ export interface RouterProps {
   onBitChange?: (value: number) => void; // measured in mm
   onBushChange?: (value: number) => void; // measured in mm
   onTargetSizeChange?: (value: number) => void; // measured in mm
+  onReset?: () => void;
 }
 
 export const RouterInput: React.FC<RouterProps> = ({
@@ -17,7 +18,8 @@ export const RouterInput: React.FC<RouterProps> = ({
   targetSize = 0,
   onBitChange,
   onBushChange,
-  onTargetSizeChange
+  onTargetSizeChange,
+  onReset
 }) => {
   const { i18n } = useLanguage();
 
@@ -28,8 +30,17 @@ export const RouterInput: React.FC<RouterProps> = ({
 
   return (
     <div className="card w-full">
-      <div className="flex justify-between items-baseline mb-2">
+      {/* Card header row: bit label + reset button */}
+      <div className="flex justify-between items-center mb-2">
         <label htmlFor="bit">{i18n('bit')}</label>
+        {onReset && (
+          <button
+            className="uppercase text-xs tracking-widest text-(--text-muted) border border-(--line-color) rounded-lg px-3 py-1 cursor-pointer hover:text-(--text-main) hover:border-(--accent) transition-colors duration-200"
+            onClick={onReset}
+          >
+            {i18n('reset')}
+          </button>
+        )}
       </div>
       <div className="input-wrapper ring-spin mb-6">
         <input

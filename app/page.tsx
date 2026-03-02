@@ -42,6 +42,13 @@ export default function Home() {
     targetSize.restore(entry.targetSize);
   };
 
+  const handleReset = () => {
+    isRestoring.current = true;
+    bit.restore(0);
+    bush.restore(0);
+    targetSize.restore(0);
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center">
       <main className="flex min-h-screen w-full gap-8 max-w-3xl flex-col py-8 sm:items-start">
@@ -52,6 +59,7 @@ export default function Home() {
           bit={bit.value}
           bush={bush.value}
           targetSize={targetSize.value}
+          onReset={handleReset}
         />
         <Result bit={bit.value} bush={bush.value} targetSize={targetSize.value} />
         <History entries={entries} onRestore={handleRestore} onClear={clearHistory} />

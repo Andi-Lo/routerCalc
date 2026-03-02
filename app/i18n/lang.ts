@@ -14,7 +14,8 @@ export const Translations: Record<Lang, { [key: string]: string }> = {
     error_msg: 'Fräser > Ring',
     toggle: 'DE',
     history_title: 'Zuletzt verwendet',
-    history_clear: 'Löschen'
+    history_clear: 'Löschen',
+    reset: 'Zurücksetzen'
   },
   en: {
     bit: 'Router Bit',
@@ -29,6 +30,7 @@ export const Translations: Record<Lang, { [key: string]: string }> = {
     error_msg: 'Bit > Bushing',
     toggle: 'EN',
     history_title: 'Recent',
-    history_clear: 'Clear'
+    history_clear: 'Clear',
+    reset: 'Reset'
   }
 };
