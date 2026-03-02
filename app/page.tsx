@@ -1,11 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { RouterInput } from '@/app/components/RouterInput/RouterInput';
 import { useNumberInput } from '@/app/hooks/use-number-input';
 import { Result } from '@/app/components/Result/Result';
-import { useEffect, useState } from 'react';
-import { Translations } from '@/app/i18n/lang';
 
 export default function Home() {
   const bit = useNumberInput(0);

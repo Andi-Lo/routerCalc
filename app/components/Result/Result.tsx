@@ -16,7 +16,7 @@ export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 
   return (
     <div className="card w-full">
       <div className="result-box">
-        <div className="result-label">{i18n('template_size')}</div>
+        <label>{i18n('template_size')}</label>
         <div className="result-value result-value--green">
           {targetSize > 0 ? holeSize + ' mm' : '-'}
         </div>
@@ -28,7 +28,7 @@ export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 
       </div>
 
       <div className="result-box result-box--divider">
-        <div className="result-label">{i18n('offset')}</div>
+        <label>{i18n('offset')}</label>
         <div className={`result-value ${hasError ? 'text-error' : 'result-value--orange'}`}>
           {hasError ? i18n('error') : offset.toFixed(2)}
         </div>

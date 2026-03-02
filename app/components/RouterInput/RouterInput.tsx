@@ -30,7 +30,7 @@ export const RouterInput: React.FC<RouterProps> = ({
 
   return (
     <div className="card w-full">
-      <div className="label-group">
+      <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="bit">{i18n('bit')}</label>
       </div>
       <div className="input-wrapper mb-6">
@@ -44,7 +44,7 @@ export const RouterInput: React.FC<RouterProps> = ({
         <span className="unit">mm</span>
       </div>
 
-      <div className="label-group">
+      <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="bush">{i18n('bush')}</label>
       </div>
       <div className="input-wrapper mb-6">
@@ -56,10 +56,10 @@ export const RouterInput: React.FC<RouterProps> = ({
           inputMode="decimal"
         ></input>
         <span className="unit">mm</span>
-        <p className="pt-2 result-label">{i18n('target_size_hint')}</p>
+        <label className="pt-2 hint">{i18n('target_size_hint')}</label>
       </div>
 
-      <div className="label-group">
+      <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="targetSize">{i18n('target_size')}</label>
       </div>
       <div className="input-wrapper">
