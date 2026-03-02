@@ -30,17 +30,8 @@ export const RouterInput: React.FC<RouterProps> = ({
 
   return (
     <div className="card w-full">
-      {/* Card header row: bit label + reset button */}
-      <div className="flex justify-between items-center mb-2">
+      <div className="flex justify-between items-baseline mb-2">
         <label htmlFor="bit">{i18n('bit')}</label>
-        {onReset && (
-          <button
-            className="btn-subtle hover:text-(--text-main) hover:border-(--accent)"
-            onClick={onReset}
-          >
-            {i18n('reset')}
-          </button>
-        )}
       </div>
       <div className="input-wrapper ring-spin mb-6">
         <input
@@ -81,6 +72,14 @@ export const RouterInput: React.FC<RouterProps> = ({
         />
         <span className="unit">mm</span>
       </div>
+
+      {onReset && (
+        <div className="flex justify-end pt-4 mt-4">
+          <button className="btn-subtle btn-subtle--accent" onClick={onReset}>
+            {i18n('reset')}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

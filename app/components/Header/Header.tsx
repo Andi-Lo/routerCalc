@@ -25,7 +25,7 @@ export const Header = () => {
         Router<span className="text-(--text-main)">Calc</span>
       </h1>
       <button
-        className="btn-subtle hover:text-(--text-main) hover:border-(--accent)"
+        className="btn-subtle btn-subtle--accent"
         onClick={() => setCurrentLang(currentLang === 'en' ? 'de' : 'en')}
       >
         {currentLang}
