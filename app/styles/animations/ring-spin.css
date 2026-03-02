@@ -20,6 +20,8 @@
 
 .ring-spin {
     position: relative;
+    /* Prevent reflow of pseudo-elements when input content changes */
+    contain: layout;
 }
 
 .ring-spin::before,
