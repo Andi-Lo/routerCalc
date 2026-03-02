@@ -18,15 +18,13 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
 
     if (!svgBush || !svgBit || !dimGroup || !dimLine || !dimTick1 || !dimTick2 || !dimText) return;
 
-    const scale = 3.5;
-    let rBush = (bush / 2) * scale;
+    const MAX_R = 75; // px — bushing always fills to this radius
+
+    // Scale so rBush always hits MAX_R, rBit follows proportionally
+    const scale = bush > 0 ? MAX_R / (bush / 2) : 1;
+    const rBush = bush > 0 ? MAX_R : 0;
     let rBit = (bit / 2) * scale;
 
-    if (rBush > 80) {
-      const ratio = 80 / rBush;
-      rBush = 80;
-      rBit = rBit * ratio;
-    }
     if (rBit < 4 && bit > 0) rBit = 4;
 
     svgBush.setAttribute('r', `${rBush}`);
@@ -112,7 +110,7 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
             stroke="var(--accent)"
             strokeWidth="1"
           />
-          <text id="dimText" x="170" y="90" className="cad-text">
+          <text id="dimText" x="170" y="88" className="cad-text">
             4.5
           </text>
         </g>
