@@ -1,8 +1,8 @@
 'use client';
 
-import { CadSVG } from '@/app/Result/CadSVG';
-import { RouterProps } from '@/app/RouterInput/RouterInput';
 import { useLanguage } from '@/app/i18n/LanguageContext';
+import { RouterProps } from '@/app/components/RouterInput/RouterInput';
+import { CadSVG } from '@/app/components/Result/CadSVG';
 
 export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 0 }) => {
   const { i18n } = useLanguage();

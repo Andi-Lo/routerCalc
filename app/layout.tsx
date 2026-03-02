@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import { Header } from '@/app/Header/Header';
+import './styles/globals.css';
 import { LanguageProvider } from '@/app/i18n/LanguageContext';
+import { Header } from '@/app/components/Header/Header';
 
 export const metadata: Metadata = {
   title: 'Router Calculator',
