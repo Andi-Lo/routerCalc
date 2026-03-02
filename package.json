@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "engines": {
+    "node": ">=22.x",
+    "npm": ">=10.x"
+  },
   "dependencies": {
     "next": "16.1.6",
     "react": "19.2.3",
@@ -23,5 +27,13 @@
     "prettier": "^3.8.1",
     "tailwindcss": "^4",
     "typescript": "5.9.3"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-arm64-musl": "^4.0.1",
+    "@tailwindcss/oxide-linux-x64-musl": "^4.0.1",
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
+    "lightningcss-linux-arm64-musl": "^1.29.1",
+    "lightningcss-linux-x64-musl": "^1.29.1",
+    "lightningcss-linux-x64-gnu": "^1.29.1"
   }
 }
