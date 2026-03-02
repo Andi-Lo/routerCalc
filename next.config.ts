@@ -4,7 +4,7 @@ const isProd = process.env.GITHUB_ACTIONS === 'true';
 
 const nextConfig: NextConfig = {
   output: isProd ? 'export' : undefined,
-  basePath: isProd ? '/react-playground' : '',
+  basePath: isProd ? '/routerCalc' : '',
   images: isProd ? { unoptimized: true } : {}
 };
 
