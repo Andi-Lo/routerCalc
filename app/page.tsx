@@ -19,7 +19,7 @@ export default function Home() {
   const hasError = _bit > 0 && _bush > 0 && _bit >= _bush;
   const allFilled = _bit > 0 && _bush > 0 && targetSize.value > 0;
 
-  // Save to history 800ms after the user stops changing values.
+  // Save to history 1000ms after the user stops changing values.
   // Skipped when the change came from a history restore.
   useEffect(() => {
     if (!allFilled || hasError) return;
@@ -31,7 +31,7 @@ export default function Home() {
       const offset = (_bush - _bit) / 2;
       const holeSize = targetSize.value + (_bush - _bit);
       addEntry({ bit: _bit, bush: _bush, targetSize: targetSize.value, holeSize, offset });
-    }, 800);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [_bit, _bush, targetSize.value]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -51,7 +51,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <main className="flex min-h-screen w-full gap-8 max-w-3xl flex-col py-8 sm:items-start">
+      <main className="flex min-h-screen w-full gap-8 max-w-3xl flex-col py-8 px-4 sm:px-6 sm:items-start">
         <RouterInput
           onBitChange={bit.handleChange}
           onBushChange={bush.handleChange}
