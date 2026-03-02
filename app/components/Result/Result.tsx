@@ -10,12 +10,14 @@ export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 
 
   const _bit = isNaN(bit) ? 0 : bit;
   const _bush = isNaN(bush) ? 0 : bush;
-  const offset = (_bush - _bit) / 2;
-  const holeSize = targetSize + (_bush - _bit);
+  const bothPresent = _bit > 0 && _bush > 0;
+  const allPresent = bothPresent && targetSize > 0;
+  const offset = bothPresent ? (_bush - _bit) / 2 : 0;
+  const holeSize = allPresent ? targetSize + (_bush - _bit) : 0;
 
-  const hasError = _bit > 0 && _bush > 0 && _bit >= _bush;
-  const animatedHoleSize = useCountUp(holeSize);
-  const animatedOffset = useCountUp(hasError ? 0 : offset);
+  const hasError = bothPresent && _bit >= _bush;
+  const animatedHoleSize = useCountUp(allPresent && !hasError ? holeSize : 0);
+  const animatedOffset = useCountUp(bothPresent && !hasError ? offset : 0);
 
   return (
     <div className="card w-full">
