@@ -56,12 +56,13 @@ export const RouterInput: React.FC<RouterProps> = ({
           inputMode="decimal"
         ></input>
         <span className="unit">mm</span>
+        <p className="pt-2 result-label">{i18n('target_size_hint')}</p>
       </div>
 
       <div className="label-group">
         <label htmlFor="targetSize">{i18n('target_size')}</label>
       </div>
-      <div className="input-wrapper mb-0">
+      <div className="input-wrapper">
         <input
           type="number"
           id="targetSize"
@@ -71,7 +72,6 @@ export const RouterInput: React.FC<RouterProps> = ({
         ></input>
         <span className="unit">mm</span>
       </div>
-      <p className="pt-2 result-label">{i18n('target_size_hint')}</p>
     </div>
   );
 };
