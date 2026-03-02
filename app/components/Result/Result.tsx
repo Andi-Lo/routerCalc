@@ -3,6 +3,7 @@
 import { useLanguage } from '@/app/i18n/LanguageContext';
 import { RouterProps } from '@/app/components/RouterInput/RouterInput';
 import { CadSVG } from '@/app/components/Result/CadSVG';
+import { useCountUp } from '@/app/hooks/use-count-up';
 
 export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 0 }) => {
   const { i18n } = useLanguage();
@@ -11,26 +12,25 @@ export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 
   const _bush = isNaN(bush) ? 0 : bush;
   const offset = (_bush - _bit) / 2;
   const holeSize = targetSize + (_bush - _bit);
+
   const hasError = _bit > 0 && _bush > 0 && _bit >= _bush;
+  const animatedHoleSize = useCountUp(holeSize);
+  const animatedOffset = useCountUp(hasError ? 0 : offset);
 
   return (
     <div className="card w-full">
       <div className="result-box">
         <label>{i18n('template_size')}</label>
-        <div className="result-value result-value--green">
-          {targetSize > 0 ? holeSize + ' mm' : '-'}
+        <div className="result-value result-value--green">{animatedHoleSize.toFixed(2)} mm</div>
+        <div className="formula">
+          {targetSize > 0 ? `${targetSize} + (${bush} - ${bit}) = ${holeSize}` : '-'}
         </div>
-        {targetSize > 0 && bit > 0 && bush > 0 && (
-          <div className="formula">
-            {targetSize} + ({bush} - {bit}) = {holeSize}
-          </div>
-        )}
       </div>
 
       <div className="result-box result-box--divider">
         <label>{i18n('offset')}</label>
         <div className={`result-value ${hasError ? 'text-error' : 'result-value--orange'}`}>
-          {hasError ? i18n('error') : offset.toFixed(2)}
+          {hasError ? i18n('error') : animatedOffset.toFixed(2)}
         </div>
         <div className="formula">{hasError ? i18n('error_msg') : `(${bush} - ${bit}) / 2`}</div>
       </div>
