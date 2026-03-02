@@ -54,12 +54,9 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      data-sticky={bothPresent ? 'true' : 'false'}
-    >
-      <StickyResult holeSize={holeSize} offset={offset} visible={bothPresent} hasError={hasError} />
-      <main className="flex min-h-screen w-full gap-8 max-w-3xl flex-col py-8 px-4 sm:px-6 sm:items-start">
+    <div className="flex min-h-screen items-center justify-center">
+      <StickyResult holeSize={holeSize} offset={offset} hasError={hasError} />
+      <main className="flex min-h-screen w-full gap-8 max-w-3xl flex-col py-8 px-4 sm:px-6 sm:items-start md:pt-8 pt-20">
         <RouterInput
           onBitChange={bit.handleChange}
           onBushChange={bush.handleChange}

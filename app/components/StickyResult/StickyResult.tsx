@@ -7,22 +7,16 @@ import { useCountUp } from '@/app/hooks/use-count-up';
 export interface StickyResultProps {
   holeSize: number; // mm
   offset: number; // mm
-  visible: boolean;
   hasError: boolean;
 }
 
-export const StickyResult: React.FC<StickyResultProps> = ({
-  holeSize,
-  offset,
-  visible,
-  hasError
-}) => {
+export const StickyResult: React.FC<StickyResultProps> = ({ holeSize, offset, hasError }) => {
   const { i18n } = useLanguage();
   const animatedHoleSize = useCountUp(holeSize);
   const animatedOffset = useCountUp(hasError ? 0 : offset);
 
   return (
-    <div className={`sticky-result ${visible ? 'sticky-result--visible' : ''}`}>
+    <div className="sticky-result">
       <span className="sticky-result__item">
         <span className="sticky-result__label">{i18n('template_size_short')}</span>
         <span className="sticky-result__value sticky-result__value--green">
