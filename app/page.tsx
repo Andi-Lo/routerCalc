@@ -5,6 +5,7 @@ import { useNumberInput } from '@/app/hooks/use-number-input';
 import { Result } from '@/app/components/Result/Result';
 import { useHistory, HistoryEntry } from '@/app/hooks/use-history';
 import { History } from '@/app/components/History/History';
+import { StickyResult } from '@/app/components/StickyResult/StickyResult';
 import { useEffect, useRef } from 'react';
 
 export default function Home() {
@@ -16,8 +17,11 @@ export default function Home() {
 
   const _bit = isNaN(bit.value) ? 0 : bit.value;
   const _bush = isNaN(bush.value) ? 0 : bush.value;
-  const hasError = _bit > 0 && _bush > 0 && _bit >= _bush;
-  const allFilled = _bit > 0 && _bush > 0 && targetSize.value > 0;
+  const bothPresent = _bit > 0 && _bush > 0;
+  const hasError = bothPresent && _bit >= _bush;
+  const allFilled = bothPresent && targetSize.value > 0;
+  const offset = bothPresent ? (_bush - _bit) / 2 : 0;
+  const holeSize = allFilled ? targetSize.value + (_bush - _bit) : 0;
 
   // Save to history 1000ms after the user stops changing values.
   // Skipped when the change came from a history restore.
@@ -50,7 +54,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div
+      className="flex min-h-screen items-center justify-center"
+      data-sticky={bothPresent ? 'true' : 'false'}
+    >
+      <StickyResult holeSize={holeSize} offset={offset} visible={bothPresent} hasError={hasError} />
       <main className="flex min-h-screen w-full gap-8 max-w-3xl flex-col py-8 px-4 sm:px-6 sm:items-start">
         <RouterInput
           onBitChange={bit.handleChange}

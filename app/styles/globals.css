@@ -3,6 +3,7 @@
 @import "./animations/ring-spin.css";
 @import "./components/button.css";
 @import "./components/history.css";
+@import "./components/sticky-result.css";
 
 html,
 body {
@@ -128,7 +129,6 @@ input[type="number"]:focus {
 /* Result Display */
 .result-box {
     text-align: center;
-    padding: 1rem 0;
 }
 
 .result-box--divider {

@@ -20,24 +20,39 @@ export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 
   const animatedOffset = useCountUp(bothPresent && !hasError ? offset : 0);
 
   return (
-    <div className="card w-full">
-      <div className="result-box">
-        <label>{i18n('template_size')}</label>
-        <div className="result-value result-value--green">{animatedHoleSize.toFixed(2)} mm</div>
-        <div className="formula">
-          {targetSize > 0 ? `${targetSize} + (${bush} - ${bit}) = ${holeSize}` : '-'}
-        </div>
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-3">
+        <span className="label">{i18n('result_title')}</span>
       </div>
+      <div className="card w-full">
+        <div className="hidden md:block">
+          <div className="result-box">
+            <label>{i18n('template_size')}</label>
+            <div className="result-value result-value--green">{animatedHoleSize.toFixed(2)} mm</div>
+            <div className="formula">
+              {targetSize > 0 ? `${targetSize} + (${bush} - ${bit}) = ${holeSize}` : '-'}
+            </div>
+          </div>
 
-      <div className="result-box result-box--divider">
-        <label>{i18n('offset')}</label>
-        <div className={`result-value ${hasError ? 'text-error' : 'result-value--orange'}`}>
-          {hasError ? i18n('error') : animatedOffset.toFixed(2)}
+          <div className="result-box result-box--divider">
+            <label>{i18n('offset')}</label>
+            <div className={`result-value ${hasError ? 'text-error' : 'result-value--orange'}`}>
+              {hasError ? i18n('error') : animatedOffset.toFixed(2)}
+            </div>
+            <div className="formula">{hasError ? i18n('error_msg') : `(${bush} - ${bit}) / 2`}</div>
+          </div>
         </div>
-        <div className="formula">{hasError ? i18n('error_msg') : `(${bush} - ${bit}) / 2`}</div>
-      </div>
 
-      <CadSVG bit={bit} bush={bush} offset={offset}></CadSVG>
+        {/* Offset label + value shown on mobile as context for the SVG */}
+        <div className="md:hidden result-box">
+          <label className="mr-2">{i18n('offset')}</label>
+          <div className={`formula ${hasError ? 'text-error' : ''}`}>
+            {hasError ? 'Error: ' + i18n('error_msg') : `(${bush} - ${bit}) / 2`}
+          </div>
+        </div>
+
+        <CadSVG bit={bit} bush={bush} offset={offset} />
+      </div>
     </div>
   );
 };

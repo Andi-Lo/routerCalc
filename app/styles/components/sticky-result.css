@@ -1,0 +1,82 @@
+@import "../variables.css";
+
+/* Sticky result bar — fixed below the header, only visible on mobile */
+.sticky-result {
+    position: fixed;
+    top: 81px; /* matches header height */
+    left: 0;
+    right: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.6rem 1.5rem;
+    background: rgba(15, 23, 36, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.sticky-result--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.sticky-result__item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.sticky-result__label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.sticky-result__value {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.sticky-result__value--green {
+    color: var(--accent-green);
+    text-shadow: 0 0 0.75rem rgba(74, 222, 128, 0.3);
+}
+
+.sticky-result__value--amber {
+    color: var(--accent);
+    text-shadow: 0 0 0.75rem rgba(251, 191, 36, 0.3);
+}
+
+.sticky-result__divider {
+    width: 1px;
+    height: 1.5rem;
+    background: var(--line-color);
+    flex-shrink: 0;
+}
+
+/* Only show on mobile — on larger screens the result card is always visible */
+@media (min-width: 768px) {
+    .sticky-result {
+        display: none;
+    }
+}
+
+/* Push content down on mobile when the bar is visible */
+@media (max-width: 767px) {
+    [data-sticky='true'] main {
+        padding-top: 4rem;
+    }
+}
+
