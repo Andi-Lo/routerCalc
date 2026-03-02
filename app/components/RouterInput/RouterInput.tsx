@@ -35,7 +35,7 @@ export const RouterInput: React.FC<RouterProps> = ({
         <label htmlFor="bit">{i18n('bit')}</label>
         {onReset && (
           <button
-            className="uppercase text-xs tracking-widest text-(--text-muted) border border-(--line-color) rounded-lg px-3 py-1 cursor-pointer hover:text-(--text-main) hover:border-(--accent) transition-colors duration-200"
+            className="btn-subtle hover:text-(--text-main) hover:border-(--accent)"
             onClick={onReset}
           >
             {i18n('reset')}

@@ -25,7 +25,7 @@ export const Header = () => {
         Router<span className="text-(--text-main)">Calc</span>
       </h1>
       <button
-        className="uppercase text-xs tracking-widest text-(--text-muted) border border-(--line-color) rounded-lg px-3 py-1.5 cursor-pointer hover:text-(--text-main) hover:border-(--accent) transition-colors duration-200"
+        className="btn-subtle hover:text-(--text-main) hover:border-(--accent)"
         onClick={() => setCurrentLang(currentLang === 'en' ? 'de' : 'en')}
       >
         {currentLang}

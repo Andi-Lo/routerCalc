@@ -20,10 +20,7 @@ export const History: React.FC<HistoryProps> = ({ entries, onRestore, onClear })
       {/* Header: reuses global label style + mirrors the language toggle button */}
       <div className="flex justify-between items-center mb-3">
         <span className="label">{i18n('history_title')}</span>
-        <button
-          className="uppercase text-xs tracking-widest text-(--text-muted) border border-(--line-color) rounded-lg px-3 py-1.5 cursor-pointer hover:text-(--text-error) hover:border-(--text-error) transition-colors duration-200"
-          onClick={onClear}
-        >
+        <button className="btn-subtle btn-subtle--destructive" onClick={onClear}>
           {i18n('history_clear')}
         </button>
       </div>
