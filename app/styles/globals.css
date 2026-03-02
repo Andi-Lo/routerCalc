@@ -105,12 +105,24 @@ label {
                 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+.btn-subtle:active {
+    transform: translateY(1px);
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
 .btn-subtle--destructive:hover {
     color: var(--text-error);
     border-color: var(--text-error);
     background: rgba(239, 68, 68, 0.08);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
                 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.btn-subtle--destructive:active {
+    transform: translateY(1px);
+    background: rgba(239, 68, 68, 0.15);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Custom Modern Inputs */
