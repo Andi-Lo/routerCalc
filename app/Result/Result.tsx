@@ -32,9 +32,7 @@ export const Result: React.FC<RouterProps> = ({ bit = 0, bush = 0, targetSize = 
         <div className={`result-value ${hasError ? 'text-error' : 'result-value--orange'}`}>
           {hasError ? i18n('error') : offset.toFixed(2)}
         </div>
-        <div className="formula">
-          {hasError ? i18n('error_msg') : `({ ${bush} } - { ${bit} }) / 2`}
-        </div>
+        <div className="formula">{hasError ? i18n('error_msg') : `(${bush} - ${bit}) / 2`}</div>
       </div>
 
       <CadSVG bit={bit} bush={bush} offset={offset}></CadSVG>
