@@ -1,8 +1,11 @@
-## Project Overview
+## <img src="./public/routerCalcLogo.png" alt="RouterCalc Logo" width="48" height="48" align="center" /> RouterCalc
 
-**RouterCalc** is a woodworking/CNC tool calculator built as a **Next.js** web app (App Router). It helps users calculate the correct **template hole size** and **offset** when using a router guide bushing (copy ring) together with a router bit.
+https://andi-lo.github.io/routerCalc/
 
-### Core Domain Concept
+**RouterCalc** is a woodworking/CNC tool calculator. It helps users calculate the correct **template hole size** and **offset** when using a router guide bushing (copy ring) together with a router bit.
+
+
+### Core Concept
 
 - **Template Hole Size** = `targetCutSize + (bushingDiameter - bitDiameter)`
 - **Offset** = `(bushingDiameter - bitDiameter) / 2`
