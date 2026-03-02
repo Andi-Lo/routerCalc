@@ -11,7 +11,7 @@ All measurements are in **millimetres (mm)**. An error state is shown when the b
 
 ---
 
-### Devlopment 
+### Development
 
 First, run the development server:
 

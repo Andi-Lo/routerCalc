@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./variables.css";
 @import "./animations/ring-spin.css";
+@import "./components/history.css";
 
 html,
 body {
@@ -224,5 +225,3 @@ svg {
     font-weight: 600;
     text-anchor: middle;
 }
-
-

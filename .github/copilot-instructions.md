@@ -1,7 +1,5 @@
 # GitHub Copilot Instructions
 
-
-
 ## Tech Stack
 
 - **Framework**: Next.js (App Router)
@@ -12,7 +10,9 @@
 
 ### Build / Deploy
 
-The app deploys as a static export to GitHub Pages via GitHub Actions. The `GITHUB_ACTIONS` env var in `next.config.ts` controls the switch between dev and production output modes.
+The app deploys as a static export to GitHub Pages via GitHub Actions. The
+`GITHUB_ACTIONS` env var in `next.config.ts` controls the switch between dev and
+production output modes.
 
 ---
 
@@ -33,18 +33,26 @@ app/
 ## Key Conventions
 
 ### State & Data Flow
+
 - Top-level input state lives in `page.tsx` and is passed down as props.
-- All measurement values are in **mm** — reflect this in variable names and comments.
+- All measurement values are in **mm** — reflect this in variable names and
+  comments.
 
 ### i18n
+
 - All UI strings go through the `i18n(key)` function from `useLanguage()`.
-- Translation keys are defined in `lang.ts`. Always add new keys to **both** `en` and `de` dictionaries.
+- Translation keys are defined in `lang.ts`. Always add new keys to **both**
+  `en` and `de` dictionaries.
 
 ### Styling
-- Use Tailwind utility classes for layout.
-- Use custom CSS classes defined in `globals.css` for component-level styles.
+
+- Use Tailwind utility classes for layout before writing custom css.
+- Use CSS and its classes defined in `globals.css` for component-level styles.
+- Create component styles for new components under `styles/components`
 - Follow **BEM** naming when adding new CSS classes.
-- Design tokens (colours, spacing, etc.) are defined as CSS custom properties in `globals.css` — use those variables instead of hardcoding values.
+- Design tokens (colours, spacing, etc.) are defined as CSS custom
+  properties in `variables.css` — use those variables instead of hardcoding
+  values.
 
 ---
 
@@ -60,8 +68,8 @@ export interface MyProps {
   propB?: number;
 }
 
-export const MyComponent: React.FC<MyProps> = ({ propA, propB }) => {
-  return <div>{propA}</div>;
+export const MyComponent: React.FC<MyProps> = ({propA, propB}) => {
+  return <div>{propA} < /div>;
 };
 ```
 
@@ -86,4 +94,5 @@ npm run start        # Start production server
 3. Include `.spec.js` files for test coverage
 4. Add `'use client'` when using hooks or browser APIs
 5. Always add translations for both `en` and `de` when adding new UI strings
-6. All measurement values are in **mm** — reflect this in comments and variable names
+6. All measurement values are in **mm** — reflect this in comments and variable
+   names

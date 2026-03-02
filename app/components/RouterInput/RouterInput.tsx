@@ -1,6 +1,5 @@
 'use client';
 
-import { useNumberInput } from '@/app/hooks/use-number-input';
 import { useLanguage } from '@/app/i18n/LanguageContext';
 
 export interface RouterProps {
@@ -13,15 +12,14 @@ export interface RouterProps {
 }
 
 export const RouterInput: React.FC<RouterProps> = ({
+  bit = 0,
+  bush = 0,
+  targetSize = 0,
   onBitChange,
   onBushChange,
   onTargetSizeChange
 }) => {
   const { i18n } = useLanguage();
-
-  const bit = useNumberInput(undefined, onBitChange);
-  const bush = useNumberInput(undefined, onBushChange);
-  const targetSize = useNumberInput(undefined, onTargetSizeChange);
 
   const parseUserInput = (value: string): number => {
     const parsed = parseFloat(value.replace(',', '.'));
@@ -37,10 +35,10 @@ export const RouterInput: React.FC<RouterProps> = ({
         <input
           type="number"
           id="bit"
-          value={bit.value === 0 ? '' : bit.value}
-          onChange={(e) => bit.handleChange(parseUserInput(e.target.value))}
+          value={bit === 0 ? '' : bit}
+          onChange={(e) => onBitChange?.(parseUserInput(e.target.value))}
           inputMode="decimal"
-        ></input>
+        />
         <span className="unit">mm</span>
       </div>
 
@@ -51,10 +49,10 @@ export const RouterInput: React.FC<RouterProps> = ({
         <input
           type="number"
           id="bush"
-          value={bush.value === 0 ? '' : bush.value}
-          onChange={(e) => bush.handleChange(parseUserInput(e.target.value))}
+          value={bush === 0 ? '' : bush}
+          onChange={(e) => onBushChange?.(parseUserInput(e.target.value))}
           inputMode="decimal"
-        ></input>
+        />
         <span className="unit">mm</span>
       </div>
       <label className="pt-2 block mb-6 hint">{i18n('target_size_hint')}</label>
@@ -66,10 +64,10 @@ export const RouterInput: React.FC<RouterProps> = ({
         <input
           type="number"
           id="targetSize"
-          value={targetSize.value === 0 ? '' : targetSize.value}
-          onChange={(e) => targetSize.handleChange(parseUserInput(e.target.value))}
+          value={targetSize === 0 ? '' : targetSize}
+          onChange={(e) => onTargetSizeChange?.(parseUserInput(e.target.value))}
           inputMode="decimal"
-        ></input>
+        />
         <span className="unit">mm</span>
       </div>
     </div>

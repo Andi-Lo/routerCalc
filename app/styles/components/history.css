@@ -1,0 +1,46 @@
+@import "../variables.css";
+
+/* Subtle label inside each entry — smaller/more muted than the global label */
+.history__entry-label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Glass card aesthetic for each history row — mirrors .card */
+.history__entry {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.history__entry:hover {
+    border-color: var(--line-color-hover);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+/* Monospaced input value — matches .formula / .unit typography */
+.history__entry-value {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Monospaced result values with colour tokens */
+.history__entry-result {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
