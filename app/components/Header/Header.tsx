@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useLanguage } from '@/app/i18n/LanguageContext';
 import { useEffect } from 'react';
+import logo from '@/app/assets/logo';
 
 export const Header = () => {
   const { currentLang, setCurrentLang } = useLanguage();
@@ -15,7 +16,7 @@ export const Header = () => {
     <header>
       <h1>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/routerCalcLogo.png`}
+          src={logo}
           alt="Router Calculator logo"
           className="mr-3"
           width={48}
