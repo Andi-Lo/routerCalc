@@ -15,7 +15,7 @@ export const Header = () => {
     <header>
       <h1>
         <Image
-          src="/routerCalcLogo.png"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/routerCalcLogo.png`}
           alt="Router Calculator logo"
           className="mr-3"
           width={48}
