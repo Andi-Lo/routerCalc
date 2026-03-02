@@ -102,6 +102,8 @@ label {
 input[type="number"] {
     position: relative;
     width: 100%;
+    height: 3rem;
+    max-height: 3rem;
     min-height: 3rem;
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--line-color);
