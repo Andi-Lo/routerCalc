@@ -26,8 +26,8 @@
 .ring-spin::after {
     content: "";
     position: absolute;
-    inset: -2px;
-    border: 1.5px solid var(--ring-spin-color);
+    inset: -1px;
+    border: 1px solid var(--ring-spin-color);
     border-radius: inherit;
     opacity: 0;
     pointer-events: none;
@@ -70,7 +70,7 @@
 
 .ring-spin input[type="number"]:focus {
     border-color: transparent;
-    box-shadow: 0 0 3px 2px var(--input-border-accent-hover);
+    box-shadow: 0 0 3px 1px var(--input-border-accent-hover);
 }
 
 /* Green variant */
@@ -90,6 +90,6 @@
 
 .ring-spin--green input[type="number"]:focus {
     border-color: transparent;
-    box-shadow: 0 0 3px 2px var(--ring-spin-glow-green);
+    box-shadow: 0 0 3px 1px var(--ring-spin-glow-green);
 }
 
