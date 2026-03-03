@@ -3,12 +3,14 @@ import './styles/globals.css';
 import { LanguageProvider } from '@/app/i18n/LanguageContext';
 import { Header } from '@/app/components/Header/Header';
 
+const basePath = process.env.GITHUB_ACTIONS ? '/routerCalc' : '';
+
 export const metadata: Metadata = {
   title: 'Router Calculator',
   description: '',
   appleWebApp: true,
   icons: {
-    apple: '/apple-touch-icon.png'
+    apple: `${basePath}/apple-touch-icon.png`
   }
 };
 
