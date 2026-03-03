@@ -28,7 +28,11 @@ export const History: React.FC<HistoryProps> = ({ entries, onRestore, onClear })
       <ul className="flex flex-col gap-2 list-none p-0 m-0">
         {entries.map((entry) => (
           <li key={entry.timestamp}>
-            <button className="history__entry" onClick={() => onRestore(entry)}>
+            <button
+              className="history__entry"
+              onClick={() => onRestore(entry)}
+              aria-label={`Restore: bit ${entry.bit}mm, bushing ${entry.bush}mm, target ${entry.targetSize}mm`}
+            >
               {/* Input values — label reuses global label style */}
               <span className="flex gap-4">
                 {[
@@ -46,7 +50,7 @@ export const History: React.FC<HistoryProps> = ({ entries, onRestore, onClear })
               {/* Results */}
               <span className="flex flex-col items-end gap-0.5">
                 <span className="history__entry-result text-(--accent-green)">
-                  {entry.holeSize} mm
+                  {entry.holeSize.toFixed(2)} mm
                 </span>
                 <span className="history__entry-result text-(--accent)">
                   ± {entry.offset.toFixed(2)}

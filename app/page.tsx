@@ -32,12 +32,10 @@ export default function Home() {
         isRestoring.current = false;
         return;
       }
-      const offset = (_bush - _bit) / 2;
-      const holeSize = targetSize.value + (_bush - _bit);
       addEntry({ bit: _bit, bush: _bush, targetSize: targetSize.value, holeSize, offset });
     }, 1000);
     return () => clearTimeout(timer);
-  }, [_bit, _bush, targetSize.value]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [_bit, _bush, targetSize.value, allFilled, hasError, holeSize, offset, addEntry]);
 
   const handleRestore = (entry: HistoryEntry) => {
     isRestoring.current = true;

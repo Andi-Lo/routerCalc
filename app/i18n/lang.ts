@@ -23,7 +23,7 @@ export const Translations: Record<Lang, { [key: string]: string }> = {
     bush: 'Guide Bushing',
     target_size: 'Target Cut Size',
     target_size_short: 'Target',
-    target_size_hint: 'Outer-Ø e.g. 10, 12, 17, 20, 24, 27, 30 und 40 mm',
+    target_size_hint: 'Outer-Ø e.g. 10, 12, 17, 20, 24, 27, 30 and 40 mm',
     result_title: 'Result',
     template_size: 'TEMPLATE SIZE (HOLE SIZE)',
     template_size_short: 'TEMPLATE',

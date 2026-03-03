@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 
 export interface CadSVGProps {
   bit: number;
@@ -7,16 +9,25 @@ export interface CadSVGProps {
 }
 
 export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
-  useEffect(() => {
-    const svgBush = document.getElementById('svgBush');
-    const svgBit = document.getElementById('svgBit');
-    const dimGroup = document.getElementById('dimGroup') as HTMLElement | null;
-    const dimLine = document.getElementById('dimLine');
-    const dimTick1 = document.getElementById('dimTick1');
-    const dimTick2 = document.getElementById('dimTick2');
-    const dimText = document.getElementById('dimText');
+  const bushRef = useRef<SVGCircleElement>(null);
+  const bitRef = useRef<SVGCircleElement>(null);
+  const dimGroupRef = useRef<SVGGElement>(null);
+  const dimLineRef = useRef<SVGLineElement>(null);
+  const dimTick1Ref = useRef<SVGLineElement>(null);
+  const dimTick2Ref = useRef<SVGLineElement>(null);
+  const dimTextRef = useRef<SVGTextElement>(null);
 
-    if (!svgBush || !svgBit || !dimGroup || !dimLine || !dimTick1 || !dimTick2 || !dimText) return;
+  useEffect(() => {
+    if (
+      !bushRef.current ||
+      !bitRef.current ||
+      !dimGroupRef.current ||
+      !dimLineRef.current ||
+      !dimTick1Ref.current ||
+      !dimTick2Ref.current ||
+      !dimTextRef.current
+    )
+      return;
 
     const MAX_R = 75; // px — bushing always fills to this radius
 
@@ -27,24 +38,24 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
 
     if (rBit < 4 && bit > 0) rBit = 4;
 
-    svgBush.setAttribute('r', `${rBush}`);
-    svgBit.setAttribute('r', `${rBit}`);
+    bushRef.current.setAttribute('r', `${rBush}`);
+    bitRef.current.setAttribute('r', `${rBit}`);
 
     const startX = 120 + rBit;
     const endX = 120 + rBush;
     const width = endX - startX;
     const midX = startX + width / 2;
 
-    dimLine.setAttribute('x1', `${startX}`);
-    dimLine.setAttribute('x2', `${endX}`);
-    dimTick1.setAttribute('x1', `${startX}`);
-    dimTick1.setAttribute('x2', `${startX}`);
-    dimTick2.setAttribute('x1', `${endX}`);
-    dimTick2.setAttribute('x2', `${endX}`);
-    dimText.setAttribute('x', `${midX}`);
-    dimText.textContent = offset.toFixed(1);
+    dimLineRef.current.setAttribute('x1', `${startX}`);
+    dimLineRef.current.setAttribute('x2', `${endX}`);
+    dimTick1Ref.current.setAttribute('x1', `${startX}`);
+    dimTick1Ref.current.setAttribute('x2', `${startX}`);
+    dimTick2Ref.current.setAttribute('x1', `${endX}`);
+    dimTick2Ref.current.setAttribute('x2', `${endX}`);
+    dimTextRef.current.setAttribute('x', `${midX}`);
+    dimTextRef.current.textContent = offset.toFixed(1);
 
-    dimGroup.style.opacity = offset <= 0 ? '0' : '1';
+    dimGroupRef.current.style.opacity = offset <= 0 ? '0' : '1';
   }, [bit, bush, offset]);
 
   return (
@@ -73,16 +84,16 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
         <line x1="40" y1="100" x2="200" y2="100" className="cad-center" />
 
         {/*  Bushing (Outer) */}
-        <circle id="svgBush" cx="120" cy="100" r="70" className="cad-line cad-fill" />
+        <circle ref={bushRef} cx="120" cy="100" r="70" className="cad-line cad-fill" />
 
         {/*  Bit (Inner) */}
-        <circle id="svgBit" cx="120" cy="100" r="30" className="cad-line cad-hatch" />
+        <circle ref={bitRef} cx="120" cy="100" r="30" className="cad-line cad-hatch" />
 
         {/*  Dimension Line (Visualizing the Offset) */}
-        {/*  Positioned dynamically via JS */}
-        <g id="dimGroup" style={{ opacity: 1 }}>
+        {/*  Positioned dynamically via refs */}
+        <g ref={dimGroupRef} style={{ opacity: 1 }}>
           <line
-            id="dimLine"
+            ref={dimLineRef}
             x1="150"
             y1="100"
             x2="190"
@@ -93,7 +104,7 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
             markerStart="url(#arrow-start)"
           />
           <line
-            id="dimTick1"
+            ref={dimTick1Ref}
             x1="150"
             y1="95"
             x2="150"
@@ -102,7 +113,7 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
             strokeWidth="1"
           />
           <line
-            id="dimTick2"
+            ref={dimTick2Ref}
             x1="190"
             y1="95"
             x2="190"
@@ -110,7 +121,7 @@ export const CadSVG: React.FC<CadSVGProps> = ({ bit, bush, offset }) => {
             stroke="var(--accent)"
             strokeWidth="1"
           />
-          <text id="dimText" x="170" y="88" className="cad-text">
+          <text ref={dimTextRef} x="170" y="88" className="cad-text">
             4.5
           </text>
         </g>

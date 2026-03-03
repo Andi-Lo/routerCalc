@@ -3,7 +3,7 @@
 /* Sticky result bar — fixed below the header, only visible on mobile */
 .sticky-result {
     position: fixed;
-    top: 81px; /* matches header height */
+    top: var(--header-height); /* defined in variables.css */
     left: 0;
     right: 0;
     z-index: 90;

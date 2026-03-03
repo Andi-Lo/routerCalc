@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useLanguage } from '@/app/i18n/LanguageContext';
 
 export interface RouterProps {

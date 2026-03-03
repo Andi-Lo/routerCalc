@@ -21,6 +21,9 @@
     --line-color-hover: rgba(255, 255, 255, 0.4);
     --grid-color: rgba(255, 255, 255, 0.03);
 
+    /* Layout */
+    --header-height: 81px;
+
     /* Ring spin animation */
     --ring-spin-color: rgba(251, 191, 36, 0.45);
     --ring-spin-glow: rgba(251, 191, 36, 0.35);

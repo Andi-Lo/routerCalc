@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useLanguage } from '@/app/i18n/LanguageContext';
 import { RouterProps } from '@/app/components/RouterInput/RouterInput';
 import { CadSVG } from '@/app/components/Result/CadSVG';

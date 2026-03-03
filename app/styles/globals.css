@@ -15,6 +15,7 @@ body {
 }
 
 body {
+    position: relative;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-dark);
     background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
@@ -102,6 +103,7 @@ label {
 input[type="number"] {
     position: relative;
     width: 100%;
+    overflow: hidden;
     height: 3rem;
     max-height: 3rem;
     min-height: 3rem;
