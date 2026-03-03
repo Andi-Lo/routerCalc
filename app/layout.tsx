@@ -6,7 +6,10 @@ import { Header } from '@/app/components/Header/Header';
 export const metadata: Metadata = {
   title: 'Router Calculator',
   description: '',
-  appleWebApp: true
+  appleWebApp: true,
+  icons: {
+    apple: '/apple-touch-icon.png'
+  }
 };
 
 export default function RootLayout({
