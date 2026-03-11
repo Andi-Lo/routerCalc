@@ -1,30 +1,51 @@
-## <img src="./public/routerCalcLogo.png" alt="RouterCalc Logo" width="48" height="48" align="center" /> RouterCalc
+# <img src="./public/routerCalcLogo.png" alt="RouterCalc Logo" width="32" height="32" align="center" /> RouterCalc
 
-https://andi-lo.github.io/routerCalc/
+> A woodworking / CNC calculator for router guide bushing (copy ring) setups.
 
-**RouterCalc** is a woodworking/CNC tool calculator. It helps users calculate the correct **template hole size** and **offset** when using a router guide bushing (copy ring) together with a router bit.
-
-
-### Core Concept
-
-- **Template Hole Size** = `targetCutSize + (bushingDiameter - bitDiameter)`
-- **Offset** = `(bushingDiameter - bitDiameter) / 2`
-
-All measurements are in **millimetres (mm)**. An error state is shown when the bit diameter is greater than or equal to the bushing diameter.
+**Live app:** https://andi-lo.github.io/routerCalc/
 
 ---
 
-### Development
+## Overview
 
-First, run the development server:
+When routing with a guide bushing and a template, the bushing introduces an offset between the template edge and the actual cut. **RouterCalc** takes your bit diameter, bushing diameter, and desired cut size and instantly tells you the correct template hole size and the resulting offset — catching the common error of using a bit that is too large for a given bushing.
+
+---
+
+## Core Concept
+
+Two values are derived from the inputs:
+
+| Value | Formula |
+|---|---|
+| **Template hole size** | `targetCutSize + (bushingDiameter − bitDiameter)` |
+| **Offset** | `(bushingDiameter − bitDiameter) / 2` |
+
+All measurements are in **millimetres (mm)**. An error is shown when `bitDiameter ≥ bushingDiameter`, since the bit would protrude beyond the bushing.
+
+---
+
+## Getting Started
+
+**Prerequisites:** Node.js ≥ 22 and npm ≥ 10.
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Start the development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To build the project run:
-```bash
-npm run build
-```
+---
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the local development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Serve the production build locally |
+| `npm run lint` | Run ESLint across the codebase |
